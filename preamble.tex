@@ -1,0 +1,74 @@
+% DOCUMENT LAYOUT
+\usepackage{fontspec} 
+\usepackage[xetex]{geometry} 
+\geometry{a4paper, left=3.5cm, right=1.5cm, textheight=24cm, marginparsep=6pt, marginparwidth=2.0cm, hmarginratio=3:2}
+\setlength\parindent{0in}
+
+% FONTS
+\usepackage{libertine}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Mapping=tex-text}
+% \setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={OldStyle}]{Linux Libertine O}
+\setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={Proportional}]{Linux Libertine O}
+\setmonofont[Scale=0.9]{Linux Libertine Mono O}
+\usepackage{fontawesome}
+\usepackage{academicons}
+\usepackage{cancel}
+
+% ---- CUSTOM COMMANDS
+% \chardef\&="E050
+\newcommand{\html}[1]{\href{#1}{\scriptsize\textsc{[html]}}}
+\newcommand{\pdf}[1]{\href{#1}{\scriptsize\textsc{[pdf]}}}
+\newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
+% ---- CUSTOM AMPERSAND
+\newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
+% ---- MARGIN YEARS
+\usepackage[noadjust]{marginnote}
+\newcommand{\years}[1]{\marginnote{\small #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{8pt}
+\reversemarginpar
+
+% HEADINGS
+\usepackage{sectsty} 
+\usepackage[normalem]{ulem} 
+\sectionfont{\mdseries\upshape\Large}
+\subsectionfont{\mdseries\scshape\normalsize} 
+\subsubsectionfont{\mdseries\upshape\large} 
+
+% Mi setup
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage[babel=true]{microtype} 
+%\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{etaremune}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{natbib}
+\usepackage{bibentry}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{\small{Manuel Carlevaro -- \textit{curriculum vit\ae}}}
+\cfoot{}
+\rfoot{Página \thepage \hspace{0.05cm} de \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% PDF SETUP
+% ---- FILL IN HERE THE DOC TITLE AND AUTHOR
+\usepackage[unicode, bookmarks, colorlinks, breaklinks, 
+% ---- FILL IN HERE THE TITLE AND AUTHOR
+	pdftitle={Manuel Carlevaro - Curriculum Vitae},
+	pdfauthor={Manuel Carlevaro},
+	pdfproducer={http://carlevaro.com.ar}
+]{hyperref}  
+\hypersetup{linkcolor=blue,citecolor=blue,filecolor=black,urlcolor=MidnightBlue} 
+
+\author{Carlos Manuel Carlevaro}
+\title{Curriculum Vitae}
