@@ -9,7 +9,7 @@ TEXC_OPTS += -shell-escape
 
 run: $(CV).pdf
 
-$(CV).pdf : $(CV).tex $(CV-SRC)
+$(CV).pdf : $(CV).tex $(CV-SRC) $(CV-BIB)
 	$(TEXC) $(TEXC_OPTS) $(CV).tex -draftmode
 	bibtex $(CV).aux
 	$(TEXC) $(TEXC_OPTS) $(CV).tex 
