@@ -1,1 +1,6 @@
 .directory
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
