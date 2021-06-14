@@ -12,7 +12,8 @@
 \defaultfontfeatures{Mapping=tex-text}
 % \setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={OldStyle}]{Linux Libertine O}
 \setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={Proportional}]{Linux Libertine O}
-\setmonofont[Scale=0.9]{Linux Libertine Mono O}
+%\setmonofont[Scale=0.75]{Linux Libertine Mono O}
+\setmonofont[Scale=0.75]{DejaVu Sans Mono}
 \usepackage{fontawesome}
 \usepackage{academicons}
 \usepackage{cancel}
@@ -50,7 +51,8 @@
 \usepackage{lastpage}
 % \usepackage{natbib}
 % \usepackage{bibentry}
-\usepackage[sorting=none, url=false, doi=false, eprint=false, isbn=false, maxnames=10]{biblatex}
+\usepackage[sorting=none, url=false, doi=true, eprint=false, isbn=false, maxnames=10]{biblatex}
+\AtEveryBibitem{\clearlist{language}}
 \addbibresource{publicaciones.bib}
 \addbibresource{congresos.bib}
 
@@ -67,7 +69,6 @@
 % PDF SETUP
 % ---- FILL IN HERE THE DOC TITLE AND AUTHOR
 \usepackage[unicode, bookmarks, colorlinks, breaklinks, 
-% ---- FILL IN HERE THE TITLE AND AUTHOR
 	pdftitle={Manuel Carlevaro - Curriculum Vitae},
 	pdfauthor={Manuel Carlevaro},
 	pdfproducer={http://carlevaro.com.ar}
