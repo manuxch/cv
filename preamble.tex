@@ -17,6 +17,7 @@
 \usepackage{fontawesome}
 \usepackage{academicons}
 \usepackage{cancel}
+% \usepackage{titlesec}
 
 % ---- CUSTOM COMMANDS
 % \chardef\&="E050
@@ -26,7 +27,8 @@
 % ---- CUSTOM AMPERSAND
 \newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
 % ---- MARGIN YEARS
-\usepackage[noadjust]{marginnote}
+\usepackage[heightadjust]{marginnote}
+% \usepackage[noadjust]{marginnote}
 \newcommand{\years}[1]{\marginnote{\small #1}}
 \renewcommand*{\raggedleftmarginnote}{}
 \setlength{\marginparsep}{8pt}
@@ -36,8 +38,8 @@
 \usepackage{sectsty} 
 \usepackage[normalem]{ulem} 
 \sectionfont{\mdseries\upshape\Large}
-\subsectionfont{\mdseries\scshape\normalsize} 
-\subsubsectionfont{\mdseries\upshape\large} 
+\subsectionfont{\mdseries\scshape\large} 
+\subsubsectionfont{\mdseries\upshape\normalsize} 
 
 % Mi setup
 \usepackage[spanish]{babel}
@@ -75,6 +77,14 @@
 ]{hyperref}  
 \hypersetup{linkcolor=blue,citecolor=blue,filecolor=black,urlcolor=MidnightBlue} 
 \renewcommand{\labelitemi}{\faAngleRight}
+
+% Formato de sección, subsección y subsubsección
+% \titleformat{\section}
+% {\normalfont\Large\bfseries}{\thesection}{1em}{}
+% \titleformat{\subsection}
+% {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+% \titleformat{\subsubsection}
+% {\normalfont\tiny\bfseries}{\thesubsubsection}{1em}{}
 
 \author{Carlos Manuel Carlevaro}
 \title{Curriculum Vitae}
