@@ -6,8 +6,14 @@
 *.out
 *.bcf
 *.xml
+<<<<<<< HEAD
 *.synctex.gz
 *.fdb_latexmk
 *.fls
 *.synctex.gz
 
+=======
+*_latexmk
+*.fls
+*.synctex.gz
+>>>>>>> add1a6eb9574092d690d96777c848932da5fac5a
