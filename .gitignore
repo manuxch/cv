@@ -6,3 +6,8 @@
 *.out
 *.bcf
 *.xml
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
