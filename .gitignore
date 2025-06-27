@@ -6,6 +6,8 @@
 *.out
 *.bcf
 *.xml
+*.xdv
+*SAVE-ERROR
 <<<<<<< HEAD
 *.synctex.gz
 *.fdb_latexmk
