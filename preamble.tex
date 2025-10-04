@@ -1,7 +1,7 @@
 % DOCUMENT LAYOUT
-\usepackage{fontspec} 
-\usepackage[xetex]{geometry} 
-\geometry{a4paper, left=3.5cm, right=1.5cm, textheight=24cm, marginparsep=6pt, marginparwidth=2.0cm, hmarginratio=3:2}
+\usepackage{fontspec}
+\usepackage[xetex]{geometry}
+\geometry{a4paper, left=3.5cm, right=1.5cm, textheight=26cm, marginparsep=6pt, marginparwidth=2.0cm, hmarginratio=3:2}
 \setlength\parindent{0in}
 \usepackage{wrapfig}
 \usepackage{caption}
@@ -9,7 +9,8 @@
 
 % FONTS
 \usepackage{libertine}
-\usepackage[usenames,dvipsnames]{color}
+% \usepackage[usenames,dvipsnames]{color}
+\usepackage[svgnames]{xcolor}
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \defaultfontfeatures{Mapping=tex-text}
@@ -17,7 +18,7 @@
 \setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={Proportional}]{Linux Libertine O}
 %\setmonofont[Scale=0.75]{Linux Libertine Mono O}
 \setmonofont[Scale=0.75]{DejaVu Sans Mono}
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 \usepackage{academicons}
 \usepackage{cancel}
 % \usepackage{titlesec}
@@ -38,16 +39,16 @@
 \reversemarginpar
 
 % HEADINGS
-\usepackage{sectsty} 
-\usepackage[normalem]{ulem} 
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
 \sectionfont{\mdseries\upshape\Large}
-\subsectionfont{\mdseries\scshape\large} 
-\subsubsectionfont{\mdseries\upshape\normalsize} 
+\subsectionfont{\mdseries\scshape\large}
+\subsubsectionfont{\mdseries\upshape\normalsize}
 
 % Mi setup
 \usepackage[spanish]{babel}
 \usepackage{csquotes}
-\usepackage[babel=true]{microtype} 
+\usepackage[babel=true]{microtype}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{amsmath}
@@ -68,20 +69,20 @@
 \lhead{}
 \chead{}
 \rhead{}
-%\lfoot{\small{Manuel Carlevaro -- \textit{curriculum vit\ae}}}
+\lfoot{\color{DimGrey}\small{Manuel Carlevaro -- \textit{curriculum vit\ae}}}
 \cfoot{}
-%\rfoot{Página \thepage \hspace{0.05cm} de \pageref{LastPage}}
+\rfoot{\color{DimGrey}\small Página \thepage \hspace{0.05cm} de \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
 % PDF SETUP
 % ---- FILL IN HERE THE DOC TITLE AND AUTHOR
-\usepackage[unicode, bookmarks, colorlinks, breaklinks, 
+\usepackage[unicode, bookmarks, colorlinks, breaklinks,
 	pdftitle={Manuel Carlevaro - Curriculum Vitae},
 	pdfauthor={Manuel Carlevaro},
 	pdfproducer={http://carlevaro.ar}
-]{hyperref}  
-\hypersetup{linkcolor=blue,citecolor=blue,filecolor=black,urlcolor=MidnightBlue} 
+]{hyperref}
+\hypersetup{linkcolor=blue,citecolor=blue,filecolor=black,urlcolor=MidnightBlue}
 \renewcommand{\labelitemi}{\faAngleRight}
 
 % Formato de sección, subsección y subsubsección
