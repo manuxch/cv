@@ -1,0 +1,97 @@
+% DOCUMENT LAYOUT
+\usepackage{fontspec}
+\usepackage{geometry}
+\geometry{a4paper, left=3.5cm, right=1.5cm, textheight=26cm, marginparsep=6pt, marginparwidth=2.0cm, hmarginratio=3:2}
+\setlength\parindent{0in}
+\usepackage{wrapfig}
+\usepackage{caption}
+% \usepackage{siunitx}
+
+% FONTS
+\usepackage{libertine}
+% \usepackage[usenames,dvipsnames]{color}
+\usepackage[svgnames]{xcolor}
+% \usepackage{xunicode}
+\usepackage{xltxtra}
+\defaultfontfeatures{Ligatures=TeX}
+% \setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={OldStyle}]{Linux Libertine O}
+\setmainfont [Ligatures={Common, Rare, Discretionary}, Numbers={Proportional}]{Linux Libertine O}
+%\setmonofont[Scale=0.75]{Linux Libertine Mono O}
+\setmonofont[Scale=0.75]{DejaVu Sans Mono}
+\usepackage{fontawesome5}
+\usepackage{academicons}
+\usepackage{cancel}
+% \usepackage{titlesec}
+
+% ---- CUSTOM COMMANDS
+% \chardef\&="E050
+\newcommand{\html}[1]{\href{#1}{\scriptsize\textsc{[html]}}}
+\newcommand{\pdf}[1]{\href{#1}{\scriptsize\textsc{[pdf]}}}
+\newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
+% ---- CUSTOM AMPERSAND
+\newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
+% ---- MARGIN YEARS
+\usepackage[heightadjust]{marginnote}
+% \usepackage[noadjust]{marginnote}
+\newcommand{\years}[1]{\marginnote{\small #1}}
+\renewcommand*{\raggedleftmarginnote}{}
+\setlength{\marginparsep}{8pt}
+\reversemarginpar
+
+% HEADINGS
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
+\sectionfont{\mdseries\upshape\Large}
+\subsectionfont{\mdseries\scshape\large}
+\subsubsectionfont{\mdseries\upshape\normalsize}
+
+% Mi setup
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage[babel=true]{microtype}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{etaremune}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+% \usepackage{natbib}
+% \usepackage{bibentry}
+\usepackage[sorting=none, url=false, doi=true, eprint=false, isbn=false, maxnames=10]{biblatex}
+\AtEveryBibitem{\clearlist{language}}
+\addbibresource{publicaciones.bib}
+\addbibresource{congresos.bib}
+\AtEveryBibitem{\clearfield{note}}
+\AtEveryCitekey{\clearfield{note}}
+
+
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{\color{DimGrey}\small{Manuel Carlevaro -- \textit{curriculum vit\ae}}}
+\cfoot{}
+\rfoot{\color{DimGrey}\small Page \thepage \hspace{0.05cm} of \hspace{0.05cm} \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% PDF SETUP
+% ---- FILL IN HERE THE DOC TITLE AND AUTHOR
+\usepackage[unicode, bookmarks, colorlinks, breaklinks,
+	pdftitle={Manuel Carlevaro - Curriculum Vitae},
+	pdfauthor={Manuel Carlevaro},
+	pdfproducer={http://carlevaro.ar}
+]{hyperref}
+\hypersetup{linkcolor=blue,citecolor=blue,filecolor=black,urlcolor=MidnightBlue}
+\renewcommand{\labelitemi}{\faAngleRight}
+
+% Formato de sección, subsección y subsubsección
+% \titleformat{\section}
+% {\normalfont\Large\bfseries}{\thesection}{1em}{}
+% \titleformat{\subsection}
+% {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+% \titleformat{\subsubsection}
+% {\normalfont\tiny\bfseries}{\thesubsubsection}{1em}{}
+
+\author{Carlos Manuel Carlevaro}
+\title{Curriculum Vitae}
