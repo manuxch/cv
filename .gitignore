@@ -1,21 +1,21 @@
-.directory
+# Compilación
+build/
 *.aux
 *.bbl
-*.blg
-*.log
-*.out
 *.bcf
-*.xml
-*.xdv
-*SAVE-ERROR
-<<<<<<< HEAD
-*.synctex.gz
+*.blg
 *.fdb_latexmk
 *.fls
+*.log
+*.out
+*.run.xml
 *.synctex.gz
+*.toc
+*.xdv
+*-SAVE-ERROR
 
-=======
-*_latexmk
-*.fls
-*.synctex.gz
->>>>>>> add1a6eb9574092d690d96777c848932da5fac5a
+# Los PDF se generan en CI y se publican en GitHub Pages; no se versionan
+*.pdf
+!publicaciones_q.pdf
+
+.directory

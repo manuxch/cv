@@ -1,0 +1,77 @@
+name: Build CV
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar LaTeX y fuentes
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk biber \
+            texlive-luatex texlive-latex-extra texlive-fonts-extra texlive-fonts-recommended \
+            texlive-lang-spanish texlive-lang-english texlive-bibtex-extra texlive-publishers \
+            fonts-linuxlibertine fonts-sil-gentium-basic fonts-dejavu-mono fonts-texgyre
+          fc-cache -f
+
+      - name: Compilar las tres versiones
+        run: make all
+
+      - name: Armar sitio
+        run: |
+          mkdir -p public
+          cp build/MC-cv.pdf          public/cv.pdf
+          cp build/MC-cv-breve.pdf    public/cv-breve.pdf
+          cp build/MC-cv-short-eng.pdf public/cv-short-en.pdf
+          cp site/index.html public/index.html
+          touch public/.nojekyll
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: public/*.pdf
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: cv-pdfs
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: '*.pdf'

@@ -1,24 +1,19 @@
-CV = MC-cv
-CV-SRC = $(wildcard *.tex)
-CV-BIB = $(wildcard *.bib)
+# Uso:  make          -> compila las tres versiones en build/
+#       make cv       -> sólo la completa (también: breve, eng)
+#       make clean    -> borra build/
+LATEXMK = latexmk
 
-TEXC := xelatex
-TEXC_OPTS += -shell-escape
+.PHONY: all cv breve eng clean
 
-.PHONY: clean
+all: cv breve eng
 
-run: $(CV).pdf
-
-$(CV).pdf : $(CV).tex $(CV-SRC) $(CV-BIB)
-	$(TEXC) $(TEXC_OPTS) $(CV).tex -draftmode
-	bibtex $(CV).aux
-	$(TEXC) $(TEXC_OPTS) $(CV).tex 
-	$(TEXC) $(TEXC_OPTS) $(CV).tex 
-
-$(CV).aux : $(CV).aux $(CV-SRC) $(CV-BIB)
-	$(TEXC) $(TEXC_OPTS) $(CV).tex -draftmode
-	$(TEXC) $(TEXC_OPTS) $(CV).tex -draftmode
+cv:
+	$(LATEXMK) MC-cv.tex
+breve:
+	$(LATEXMK) MC-cv-breve.tex
+eng:
+	$(LATEXMK) MC-cv-short-eng.tex
 
 clean:
-	@rm -f *.aux *log *nav *snm *toc *out *blg *bbl 
-
+	$(LATEXMK) -C MC-cv.tex MC-cv-breve.tex MC-cv-short-eng.tex
+	rm -rf build
