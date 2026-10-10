@@ -15,10 +15,16 @@ Fuentes LaTeX de mi CV (compilado con LuaLaTeX + biber). Los PDF **no** se versi
 Requiere `lualatex`, `biber`, `latexmk` y las fuentes Linux Libertine O, Gentium Basic, TeX Gyre Pagella y DejaVu Sans Mono.
 
 ```bash
-make          # las tres versiones, salida en build/
-make cv       # sólo la completa (breve, eng)
-make clean
+make          # compila las tres versiones
+make cv       # sólo la completa  -> build/MC-cv.pdf
+make breve    # sólo la breve     -> build/MC-cv-breve.pdf
+make eng      # sólo la inglesa   -> build/MC-cv-short-eng.pdf
+make clean    # borra build/ y los auxiliares
 ```
+
+Los PDF quedan en `build/` (ignorado por git), con los nombres de los `.tex`. `make` llama a `latexmk`, que corre `lualatex` y `biber` las veces necesarias, así que alcanza con un solo comando. La salida es la misma que la publicada en Pages, salvo los nombres (`cv.pdf`, `cv-breve.pdf`, `cv-short-en.pdf`).
+
+Si el PDF queda con referencias sin resolver (`??`) tras un cambio raro, `make clean && make` fuerza una compilación desde cero.
 
 ## Dónde editar (una sola fuente por dato)
 
