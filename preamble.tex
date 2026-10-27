@@ -30,17 +30,85 @@
 \newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
 % ---- CUSTOM AMPERSAND
 \newcommand{\amper}{{\fontspec[Scale=.95]{Gentium Basic Italic}\selectfont\itshape\&}}
-% ---- MARGIN YEARS
-\usepackage[heightadjust]{marginnote}
-% \usepackage[noadjust]{marginnote}
-\newcommand{\years}[1]{\marginnote{\small #1}}
-\renewcommand*{\raggedleftmarginnote}{}
-\setlength{\marginparsep}{8pt}
-\reversemarginpar
+% ---- LÍNEA TEMPORAL (años en el margen izquierdo, unidos por una línea vertical)
+% Uso:  \begin{timeline} \years{2024} texto ... \years{2024} otro ... \end{timeline}
+%        \begin{ntimeline} ... \end{ntimeline}   (igual, con numeración inversa)
+% \years{etiqueta} abre un ítem; ítems consecutivos con la misma etiqueta se
+% agrupan (la etiqueta y el punto grande aparecen sólo en el primero).
+\usepackage{framed}
+\makeatletter
+\newlength\tlrulesep  \setlength\tlrulesep{9pt}   % distancia texto -- línea
+\newlength\tlyearsep  \setlength\tlyearsep{7pt}   % distancia línea -- año
+\newlength\tlgroupsep \setlength\tlgroupsep{3pt}  % espacio extra entre grupos
+\colorlet{tlline}{DimGrey!50}
+\colorlet{tldot}{MidnightBlue}
+\colorlet{tlyear}{DimGrey}
+\def\tl@last{}
+\def\tl@subdot{\rlap{\kern-\tlrulesep\kern.25pt\makebox[0pt]{\textcolor{tlline}{\raisebox{.38ex}{\fontsize{3.5}{3.5}\selectfont\faCircle}}}}}
+\def\tl@maindot#1{%
+  \llap{\textcolor{tlyear}{\small #1}\kern\tlrulesep\kern\tlyearsep}%
+  \rlap{\kern-\tlrulesep\kern.25pt\makebox[0pt]{\textcolor{tldot}{\raisebox{.3ex}{\fontsize{5.5}{5.5}\selectfont\faCircle}}}}}
+\let\tl@marker\tl@subdot
+\newcommand{\years}[1]{%
+  \par
+  \def\tl@this{#1}%
+  \ifx\tl@this\tl@last
+    \global\let\tl@marker\tl@subdot
+  \else
+    \ifx\tl@last\@empty\else\addvspace{\tlgroupsep}\fi
+    \gdef\tl@marker{\tl@maindot{#1}}%
+    \global\let\tl@last\tl@this
+  \fi
+  \item}
+\def\tl@makelabel#1{\tl@marker\global\let\tl@marker\tl@subdot\hss\llap{#1}}
+\newlength\tldoty \setlength\tldoty{3.6pt}  % altura del centro del punto sobre la línea base
+\newbox\tl@boxa \newbox\tl@boxb \newbox\tl@boxc
+\def\tl@rulehbox#1#2{\hbox{\hskip-\tlrulesep{\color{tlline}\vrule width .5pt #1}\hskip\tlrulesep\hskip-.5pt\box\tl@boxa}}
+% Primer tramo: la línea arranca en el centro del primer punto (no en el borde superior del bloque)
+\long\def\tl@firstframe#1{%
+  \setbox\tl@boxa\vbox{#1}%
+  \setbox\tl@boxb\copy\tl@boxa
+  {\vfuzz\maxdimen \vbadness\maxdimen \global\setbox\tl@boxc\vsplit\tl@boxb to \z@}
+  \tl@rulehbox{height \dimexpr\ht\tl@boxa-\ht\tl@boxc+\tldoty\relax depth \dp\tl@boxa}{}}
+% Tramos intermedios/finales (continúan desde la página anterior): línea completa
+\long\def\tl@midframe#1{%
+  \setbox\tl@boxa\vbox{#1}%
+  \tl@rulehbox{}{}}
+\def\tl@frame{%
+  \let\FrameCommand\tl@firstframe
+  \let\FirstFrameCommand\tl@firstframe
+  \let\MidFrameCommand\tl@midframe
+  \let\LastFrameCommand\tl@midframe
+  \OuterFrameSep=2pt
+  \MakeFramed{\FrameRestore}%
+  \global\let\tl@last\@empty
+  \global\let\tl@marker\tl@subdot}
+\newenvironment{timeline}{%
+  \tl@frame
+  \list{}{\leftmargin\z@ \labelwidth\z@ \labelsep\z@ \itemindent\z@ \listparindent\z@
+    \topsep\z@ \partopsep\z@ \itemsep 1pt \parsep 2pt plus 1pt
+    \let\makelabel\tl@makelabel}%
+}{\endlist\endMakeFramed\global\@nobreakfalse}
+\newenvironment{ntimeline}{%
+  \tl@frame
+  \etaremune
+  \let\makelabel\tl@makelabel
+  \topsep\z@ \partopsep\z@ \itemsep 2pt plus 1pt \parsep 2pt plus 1pt
+}{\endetaremune\endMakeFramed\global\@nobreakfalse}
+\makeatother
 
 % HEADINGS
 \usepackage{sectsty}
 \usepackage[normalem]{ulem}
+\usepackage{etoolbox}
+\usepackage{needspace}
+% Un título nunca queda solo al pie de página: exige espacio para unas líneas debajo
+\makeatletter
+\AtBeginDocument{%
+  \pretocmd{\section}{\Needspace{5\baselineskip}}{}{}%
+  \pretocmd{\subsection}{\if@nobreak\else\Needspace{5\baselineskip}\fi}{}{}%
+  \pretocmd{\subsubsection}{\if@nobreak\else\Needspace{3\baselineskip}\fi}{}{}}
+\makeatother
 \sectionfont{\mdseries\upshape\Large}
 \subsectionfont{\mdseries\scshape\large}
 \subsubsectionfont{\mdseries\upshape\normalsize}
@@ -103,22 +171,20 @@
 % Año mínimo de los artículos a listar con \art (0 = todos)
 \providecommand{\cvminyear}{0}
 
-% \art{año}{clave-bib}: ítem de artículo; el año se marca en el margen sólo cuando cambia
-\newcount\artlast
+% \art{año}{clave-bib}: ítem de artículo (dentro de ntimeline)
 \newcommand{\art}[2]{%
   \ifnum#1<\cvminyear\relax\else
-    \item \ifnum#1=\artlast\relax\else\marginnote{\small #1}\fi
-    \artlast=#1\relax \fullcite{#2}.%
+    \years{#1} \fullcite{#2}.%
   \fi}
 
 % Libro (idéntico en todas las versiones, salvo el idioma)
-\newcommand{\libropython}{\years{2025} F. Batista \ifdefstring{\cvlang}{english}{and}{y} Manuel Carlevaro.
+\newcommand{\libropython}{F. Batista \ifdefstring{\cvlang}{english}{and}{y} Manuel Carlevaro.
   \textbf{Python para Ciencia y Tecnolog\'ia}, 2025.
   \ifdefstring{\cvlang}{english}{Self-published}{Autoeditado}, ISBN: 978-631-00-9794-7.
   \url{https://libropython.science/}.}
 
 % Pie de página final
-\newcommand{\cvcolophon}{\vspace{1cm}\vfill{}
+\newcommand{\cvcolophon}{\vspace{0.5cm}\vfill{}
 \begin{center}
   {\scriptsize \ifdefstring{\cvlang}{english}{Last update}{Última actualización}: \today\- •\-
   \ifdefstring{\cvlang}{english}{Generated by}{Generado con}

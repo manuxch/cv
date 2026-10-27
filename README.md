@@ -29,6 +29,7 @@ Si el PDF queda con referencias sin resolver (`??`) tras un cambio raro, `make c
 ## Dónde editar (una sola fuente por dato)
 
 - **Artículos:** `articulos.tex` (una línea `\art{año}{clave}` por artículo). Las tres versiones lo leen; la breve y la inglesa filtran por `\cvminyear` (años desde el cual listar).
+- **Línea temporal (años en el margen):** todo ítem con fecha va dentro de `\begin{timeline} … \end{timeline}` (o `ntimeline`, con numeración inversa, para listas de publicaciones). Cada ítem empieza con `\years{etiqueta}`; ítems consecutivos con la misma etiqueta se agrupan (año y punto grande sólo en el primero). Un `\textbf{…}` o subtítulo entre ítems requiere cerrar y abrir otro `timeline`. Dentro de un `timeline` no usar `\footnote` (se pierde).
 - **Referencias:** `publicaciones.bib`, `congresos.bib`.
 - **Estilo y bloques compartidos** (idioma, pies de página, libro, colofón): `preamble.tex`. El idioma se elige con `\def\cvlang{english}` antes de `\input{preamble}`.
 - Las secciones traducidas (`datosPersonales.tex` / `personalData.tex`, etc.) son textos distintos por idioma y se editan por separado.
