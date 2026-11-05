@@ -14,8 +14,9 @@ build/
 *.xdv
 *-SAVE-ERROR
 
-# Los PDF se generan en CI y se publican en GitHub Pages; no se versionan
+# Los PDF de build/ no se versionan; sólo los públicos de pdf/ (make publish)
 *.pdf
 !publicaciones_q.pdf
+!pdf/*.pdf
 
 .directory

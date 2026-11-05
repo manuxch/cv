@@ -1,6 +1,6 @@
 # Curriculum Vitae
 
-Fuentes LaTeX de mi CV (compilado con LuaLaTeX + biber). Los PDF **no** se versionan: los genera GitHub Actions en cada push a `master` y se publican en GitHub Pages.
+Fuentes LaTeX de mi CV (compilado con LuaLaTeX + biber). Los PDF se compilan **localmente** con `make publish`, se commitean en `pdf/` y una Action de GitHub los publica en GitHub Pages (no instala LaTeX, tarda segundos).
 
 | Versión | Fuente | PDF publicado |
 |---|---|---|
@@ -19,6 +19,7 @@ make          # compila las tres versiones
 make cv       # sólo la completa  -> build/MC-cv.pdf
 make breve    # sólo la breve     -> build/MC-cv-breve.pdf
 make eng      # sólo la inglesa   -> build/MC-cv-short-eng.pdf
+make publish  # compila todo y copia los PDF públicos a pdf/
 make clean    # borra build/ y los auxiliares
 ```
 
@@ -37,6 +38,10 @@ Si el PDF queda con referencias sin resolver (`??`) tras un cambio raro, `make c
 ## Publicar una actualización
 
 ```bash
-git commit -am "Actualización" && git push      # actualiza Pages
-git tag v2026.10 && git push --tags             # además crea un Release con los 3 PDF
+make publish                                    # compila y actualiza pdf/
+git add -A && git commit -m "Actualización"     # incluye los PDF de pdf/
+git push                                        # la Action publica pdf/ en Pages
+git tag v2026.11 && git push --tags             # opcional: Release fechado con los 3 PDF
 ```
+
+Sólo `pdf/*.pdf` se versiona; `build/` queda ignorado. Si olvidás `make publish`, Pages sigue sirviendo los PDF anteriores.
