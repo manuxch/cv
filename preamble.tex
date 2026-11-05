@@ -62,14 +62,13 @@
   \item}
 \def\tl@makelabel#1{\tl@marker\global\let\tl@marker\tl@subdot\hss\llap{#1}}
 \newlength\tldoty \setlength\tldoty{3.6pt}  % altura del centro del punto sobre la línea base
-\newbox\tl@boxa \newbox\tl@boxb \newbox\tl@boxc
+\newbox\tl@boxa
 \def\tl@rulehbox#1#2{\hbox{\hskip-\tlrulesep{\color{tlline}\vrule width .5pt #1}\hskip\tlrulesep\hskip-.5pt\box\tl@boxa}}
-% Primer tramo: la línea arranca en el centro del primer punto (no en el borde superior del bloque)
+% Primer tramo: la línea arranca en el centro del primer punto, no en el borde superior del bloque.
+% La línea base del primer renglón queda a \topskip del borde superior de la caja.
 \long\def\tl@firstframe#1{%
   \setbox\tl@boxa\vbox{#1}%
-  \setbox\tl@boxb\copy\tl@boxa
-  {\vfuzz\maxdimen \vbadness\maxdimen \global\setbox\tl@boxc\vsplit\tl@boxb to \z@}
-  \tl@rulehbox{height \dimexpr\ht\tl@boxa-\ht\tl@boxc+\tldoty\relax depth \dp\tl@boxa}{}}
+  \tl@rulehbox{height \dimexpr\ht\tl@boxa-\topskip+\tldoty\relax depth \dp\tl@boxa}{}}
 % Tramos intermedios/finales (continúan desde la página anterior): línea completa
 \long\def\tl@midframe#1{%
   \setbox\tl@boxa\vbox{#1}%
@@ -91,9 +90,9 @@
 }{\endlist\endMakeFramed\global\@nobreakfalse}
 \newenvironment{ntimeline}{%
   \tl@frame
-  \etaremune
+  \etaremune[topsep=0pt,partopsep=0pt]% el espacio superior debe fijarse acá: \list lo inserta al abrir
   \let\makelabel\tl@makelabel
-  \topsep\z@ \partopsep\z@ \itemsep 2pt plus 1pt \parsep 2pt plus 1pt
+  \itemsep 2pt plus 1pt \parsep 2pt plus 1pt
 }{\endetaremune\endMakeFramed\global\@nobreakfalse}
 \makeatother
 
